@@ -7,7 +7,13 @@ class AuthService {
   MyUser _userFromFirebase(User? user) {
     return MyUser(uid: user!.uid);
     // null check added
-    // ternary operator used in tutorial 
+    // ternary operator used in tutorial instead
+  }
+
+  // auth change user stream
+  Stream<MyUser> get user {
+    return _auth.authStateChanges().map(_userFromFirebase);
+    // .map((event) => _userFromFirebase(event));
   }
 
   //sign in anonymous
