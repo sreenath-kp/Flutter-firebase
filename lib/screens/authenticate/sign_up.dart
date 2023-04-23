@@ -1,17 +1,17 @@
-import 'package:brew_crew/services/auth.dart';
 import 'package:flutter/material.dart';
+import '../../services/auth.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
   final Function toggleView;
-  const SignIn({super.key, required this.toggleView});
+  const Register({super.key, required this.toggleView});
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
-  // textfield state
+
   String email = '';
   String password = '';
   @override
@@ -19,21 +19,20 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
-        backgroundColor: Colors.brown[400],
-        elevation: 0.0,
-        title: const Text('Sign in to Brew Crew'),
-        actions: [
-          TextButton.icon(
-            onPressed: () {
-              widget.toggleView();
-            },
-            icon: const Icon(Icons.person),
-            label: const Text('Sign Up'),
-            style: const ButtonStyle(
-                foregroundColor: MaterialStatePropertyAll(Colors.black)),
-          )
-        ],
-      ),
+          backgroundColor: Colors.brown[400],
+          elevation: 0.0,
+          title: const Text('Sign Up to Brew Crew'),
+          actions: [
+            TextButton.icon(
+              onPressed: () {
+                widget.toggleView();
+              },
+              icon: const Icon(Icons.person),
+              label: const Text('Sign In'),
+              style: const ButtonStyle(
+                  foregroundColor: MaterialStatePropertyAll(Colors.black)),
+            )
+          ]),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
         child: Form(
@@ -68,7 +67,7 @@ class _SignInState extends State<SignIn> {
                   print(password);
                 },
                 child: const Text(
-                  "Sign In",
+                  "Sign Up",
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -79,18 +78,6 @@ class _SignInState extends State<SignIn> {
         ),
       ),
     );
+    ;
   }
 }
-//sign in anonymously
-// ElevatedButton(
-//           child: const Text('Sign in'),
-//           onPressed: () async {
-//             dynamic result = await _auth.signInAnon();
-//             if (result == null) {
-//               print('Error in Signing in');
-//             } else {
-//               print('Signed in');
-//               print(result.uid);
-//             }
-//           },
-//         ),
