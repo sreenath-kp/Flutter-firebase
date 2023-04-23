@@ -27,7 +27,16 @@ class AuthService {
       return null;
     }
   }
+
   // sign in with email
   // register
   // sign out
+  Future signOut() async {
+    try {
+      return await _auth.signOut();
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 }
