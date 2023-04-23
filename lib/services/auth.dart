@@ -4,14 +4,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   // Create user object
-  MyUser _userFromFirebase(User? user) {
-    return MyUser(uid: user!.uid);
+  MyUser? _userFromFirebase(User? user) {
+    return user != null ? MyUser(uid: user.uid) : null;
     // null check added
     // ternary operator used in tutorial instead
   }
 
   // auth change user stream
-  Stream<MyUser> get user {
+  Stream<MyUser?> get user {
     return _auth.authStateChanges().map(_userFromFirebase);
     // .map((event) => _userFromFirebase(event));
   }

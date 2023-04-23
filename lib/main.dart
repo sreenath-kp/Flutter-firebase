@@ -14,17 +14,16 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
+  
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<MyUser>.value(
+    return StreamProvider<MyUser?>.value(
       value: AuthService().user,
-      initialData: newUser(),
+      initialData: MyUser(uid: ''),
       child: const MaterialApp(
         home: Wrapper(),
       ),
     );
   }
 }
-
