@@ -14,6 +14,7 @@ class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
   String email = '';
   String password = '';
+  String error = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +53,9 @@ class _RegisterState extends State<Register> {
                 height: 20,
               ),
               TextFormField(
-                validator: (value) => value!.length < 6 ? 'Password should be atleat 6 characters long' : null,
+                validator: (value) => value!.length < 6
+                    ? 'Password should be atleat 6 characters long'
+                    : null,
                 obscureText: true,
                 onChanged: (value) {
                   setState(() => password = value);
@@ -67,8 +70,11 @@ class _RegisterState extends State<Register> {
                 ),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    print(email);
-                    print(password);
+                    dynamic result = await _auth.regWithEmail(email, password);
+                    if (result == null) {
+                      setState(() => error =
+                          'Sign Up Failed!(Provide valid email and password)');
+                    }
                   }
                 },
                 child: const Text(
@@ -77,7 +83,15 @@ class _RegisterState extends State<Register> {
                     color: Colors.white,
                   ),
                 ),
-              )
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(error,
+              style: const TextStyle(
+                fontSize: 14.0,
+                color: Colors.red,
+              ),)
             ],
           ),
         ),
