@@ -1,3 +1,4 @@
+import 'package:brew_crew/shared/constants.dart';
 import 'package:flutter/material.dart';
 import '../../services/auth.dart';
 
@@ -46,6 +47,7 @@ class _RegisterState extends State<Register> {
                 height: 20,
               ),
               TextFormField(
+                decoration: textInputDecoration.copyWith(hintText: 'Email'),
                 validator: (value) => value!.isEmpty ? 'Enter an email' : null,
                 onChanged: (value) {
                   setState(() => email = value);
@@ -55,6 +57,7 @@ class _RegisterState extends State<Register> {
                 height: 20,
               ),
               TextFormField(
+                decoration: textInputDecoration.copyWith(hintText: 'Password'),
                 validator: (value) => value!.length < 6
                     ? 'Password should be atleat 6 characters long'
                     : null,

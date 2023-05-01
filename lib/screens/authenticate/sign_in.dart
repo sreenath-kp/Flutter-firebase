@@ -1,4 +1,5 @@
 import 'package:brew_crew/services/auth.dart';
+import 'package:brew_crew/shared/constants.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
@@ -38,70 +39,77 @@ class _SignInState extends State<SignIn> {
           )
         ],
       ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                validator: (value) => value!.isEmpty ? 'Enter an email' : null,
-                onChanged: (value) {
-                  setState(() => email = value);
-                },
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                validator: (value) => value!.length < 6
-                    ? 'Password should be atleat 6 characters long'
-                    : null,
-                obscureText: true,
-                onChanged: (value) {
-                  setState(() => password = value);
-                },
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(Colors.pink[400]),
-                ),
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    dynamic result =
-                        await _auth.signInWithEmail(email, password);
-                    if (result == null) {
-                      setState(() => error =
-                          'Sign In Failed!');
-                    }
-                  }
-                },
-                child: const Text(
-                  "Sign In",
-                  style: TextStyle(
-                    color: Colors.white,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 20,
                   ),
-                ),
+                  TextFormField(
+                    decoration: textInputDecoration.copyWith(hintText: 'Email'),
+                    validator: (value) => value!.isEmpty ? 'Enter an email' : null,
+                    onChanged: (value) {
+                      setState(() => email = value);
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    decoration: textInputDecoration.copyWith(hintText: 'Password'),
+                    validator: (value) => value!.length < 6
+                        ? 'Password should be atleat 6 characters long'
+                        : null,
+                    obscureText: true,
+                    onChanged: (value) {
+                      setState(() => password = value);
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(Colors.pink[400]),
+                    ),
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        dynamic result =
+                            await _auth.signInWithEmail(email, password);
+                        if (result == null) {
+                          setState(() => error =
+                              'Sign In Failed!');
+                        }
+                      }
+                    },
+                    child: const Text(
+                      "Sign In",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    error,
+                    style: const TextStyle(
+                      fontSize: 14.0,
+                      color: Colors.red,
+                    ),
+                  )
+                ],
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                error,
-                style: const TextStyle(
-                  fontSize: 14.0,
-                  color: Colors.red,
-                ),
-              )
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
