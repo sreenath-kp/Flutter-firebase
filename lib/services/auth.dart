@@ -7,8 +7,6 @@ class AuthService {
   // Create user object
   MyUser? _userFromFirebase(User? user) {
     return user != null ? MyUser(uid: user.uid) : null;
-    // null check added
-    // ternary operator used in tutorial instead
   }
 
   // auth change user stream
