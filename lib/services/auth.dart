@@ -48,7 +48,7 @@ class AuthService {
       User? user = userCred.user;
       // create a new document for the user with uid in firestore
       await DatabaseService(uid: user!.uid)
-          .updateUserData('0', 'new crew member', 100);
+          .updateUserData('0', email.split('@')[0], 100);
       return _userFromFirebase(user);
     } catch (e) {
       print(e.toString());
