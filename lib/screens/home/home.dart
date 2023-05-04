@@ -49,7 +49,14 @@ class Home extends StatelessWidget {
             )
           ],
         ),
-        body: const BrewList(),
+        body: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/bg.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: const BrewList()),
       ),
     );
   }
