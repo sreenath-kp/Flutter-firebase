@@ -28,6 +28,7 @@ class _SettingsFormState extends State<SettingsForm> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           UserData? userData = snapshot.data;
+          _currentStrength = userData!.strength;
           return Form(
             key: _formKey,
             child: Column(
@@ -67,15 +68,10 @@ class _SettingsFormState extends State<SettingsForm> {
                   min: 100,
                   max: 900,
                   divisions: 8,
-                  activeColor: Colors.brown[_currentStrength == 100
-                      ? userData!.strength
-                      : _currentStrength],
+                  activeColor: Colors.brown[_currentStrength],
                   inactiveColor:
                       Colors.brown[_currentStrength]!.withOpacity(0.5),
-                  value: (_currentStrength == 100
-                          ? userData?.strength
-                          : _currentStrength)!
-                      .toDouble(),
+                  value: (_currentStrength).toDouble(),
                   onChanged: (value) {
                     setState(() {
                       _currentStrength = value.round();
@@ -94,9 +90,7 @@ class _SettingsFormState extends State<SettingsForm> {
                             ? userData!.sugars
                             : _currentSugars,
                         _currentName.isEmpty ? userData!.name : _currentName,
-                        _currentStrength == 100
-                            ? userData!.strength
-                            : _currentStrength);
+                        _currentStrength);
                     Navigator.pop(context);
                     // } else {}
                   },
