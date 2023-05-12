@@ -39,7 +39,7 @@ class _SettingsFormState extends State<SettingsForm> {
                 ),
                 const SizedBox(height: 20.0),
                 TextFormField(
-                  initialValue: userData?.name,
+                  initialValue: userData.name,
                   decoration: textInputDecoration.copyWith(hintText: 'Name'),
                   validator: (value) =>
                       value!.isEmpty ? 'Please enter a name' : null,
@@ -50,7 +50,7 @@ class _SettingsFormState extends State<SettingsForm> {
                 DropdownButtonFormField(
                     decoration: textInputDecoration,
                     value: _currentSugars.isEmpty
-                        ? userData!.sugars
+                        ? userData.sugars
                         : _currentSugars,
                     items: sugars
                         .map((sugar) => DropdownMenuItem(
@@ -87,9 +87,9 @@ class _SettingsFormState extends State<SettingsForm> {
                     // if (_formKey.currentState!.validate()) {
                     await DatabaseService(uid: user.uid).updateUserData(
                         _currentSugars.isEmpty
-                            ? userData!.sugars
+                            ? userData.sugars
                             : _currentSugars,
-                        _currentName.isEmpty ? userData!.name : _currentName,
+                        _currentName.isEmpty ? userData.name : _currentName,
                         _currentStrength);
                     Navigator.pop(context);
                     // } else {}
